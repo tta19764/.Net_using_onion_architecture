@@ -7,6 +7,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{746B3023-830E-4CE2-83C0-7F7715740E5F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{014DF505-56F1-4A0E-B0B6-86CE37920230}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.bat = ..\build.bat
+		..\build.ps1 = ..\build.ps1
+		..\BuildFunctions.ps1 = ..\BuildFunctions.ps1
+		..\click_to_build.bat = ..\click_to_build.bat
+		..\PrivateBuild.ps1 = ..\PrivateBuild.ps1
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
