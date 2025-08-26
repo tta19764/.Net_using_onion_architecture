@@ -6,7 +6,7 @@ $source_dir = "$base_dir\src"
 $unitTestProjectPath = "$source_dir\UnitTests"
 $integrationTestProjectPath = "$source_dir\IntegrationTests"
 $projectConfig = $env:BuildConfiguration
-$framework = "net6.0"
+$framework = "net8.0"
 $version = $env:Version
 $verbosity = "m"
 
