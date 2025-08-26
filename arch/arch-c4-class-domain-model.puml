@@ -1,0 +1,24 @@
+@startuml
+
+scale 2/3
+'left to right direction
+
+center header
+    C4 Architecture: Church Bulletin domain model
+endheader
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Component.puml
+
+title Church Bulletin domain model
+
+class ScheduledGathering{
+    -Date : database
+    -Time : time
+    -Name : string
+    -Place : string 
+}
+
+footer
+    C4 Architecture: Class Diagram $(Version)
+endfooter
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+
+scale 2/3
+left to right direction
+
+center header
+    C4 Architecture: Container Diagram Header
+endheader
+
+title Church Bulletin Container Diagram <&circle-check>
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
+
+Person(someuser, "Name", "Description")
+
+System_Boundary(system, "Church Bulletin"){
+    Container(db, "Database", "Azure SQL Database", "Detail")
+    Container(appservice, "App Service", "Web or Container", "Detail")
+    Container(ui, "UI/user app", "Blazor WASM", "Detail")
+}
+
+Rel(someuser, ui, "Uses", "http")
+Rel(ui, appservice, "Calls", "http")
+Rel(appservice, db, "Calls", "tcp")
+
+footer
+    Diagram Footer $(Version)
+endfooter
+@enduml
