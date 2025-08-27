@@ -8,7 +8,7 @@ namespace ProgrammingWithPalermo.ChurchBulletin.Core.Queries
 {
     public class ChurchBulletinItemByDateAndTimeQuery
     {
-        private DateTime TargetDate { get; }
+        public DateTime TargetDate { get; }
 
         public ChurchBulletinItemByDateAndTimeQuery(DateTime dateTime)
         {

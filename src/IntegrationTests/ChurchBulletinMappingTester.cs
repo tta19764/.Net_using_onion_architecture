@@ -11,15 +11,19 @@ namespace ProgrammingWithPalermo.ChurchBulletin.IntegrationTests
         [Test]
         public void ShouldMapChurchBulletin()
         {
-            var bulletin = new ChurchBulletinItem();
-            bulletin.Name = "Worchip service";
-            bulletin.Place = "Sanctuary";
-            bulletin.Date = new DateTime(2025, 8, 26);
-
+            // arrange
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
+
+            // EmptyDatabase(configuration);
+
+            var bulletin = new ChurchBulletinItem();
+            bulletin.Name = "Worchip service";
+            bulletin.Place = "Sanctuary";
+            bulletin.Date = new DateTime(2025, 8, 26, 0, 0, 0, DateTimeKind.Utc);
+
 
             using (var dataContext = new DataContext(new TestDataConfiguration(configuration)))
             {
@@ -27,6 +31,7 @@ namespace ProgrammingWithPalermo.ChurchBulletin.IntegrationTests
                 dataContext.SaveChanges();
             }
 
+            // act
             ChurchBulletinItem? rehydratedEntity;
             using (var context = new DataContext(new TestDataConfiguration(configuration)))
             {
@@ -34,11 +39,16 @@ namespace ProgrammingWithPalermo.ChurchBulletin.IntegrationTests
                     .SingleOrDefault(b => b == bulletin);
             }
 
-            rehydratedEntity.Id.ShouldBe(bulletin.Id);
+            // assert
+            rehydratedEntity?.Id.ShouldBe(bulletin.Id);
             rehydratedEntity.ShouldBe(bulletin);
-            rehydratedEntity.Place.ShouldBe(bulletin.Place);
-            rehydratedEntity.Name.ShouldBe(bulletin.Name);
-            rehydratedEntity.Date.ShouldBe(bulletin.Date);
+            rehydratedEntity?.Place.ShouldBe(bulletin.Place);
+            rehydratedEntity?.Name.ShouldBe(bulletin.Name);
+            rehydratedEntity?.Date.ShouldBe(bulletin.Date);
+        }
+        private static void EmptyDatabase(IConfiguration config)
+        {
+            DatabaseEmptier.DeleteAllData(config);
         }
     }
 }
