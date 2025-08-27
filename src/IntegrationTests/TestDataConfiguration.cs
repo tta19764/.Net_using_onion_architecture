@@ -1,8 +1,8 @@
-﻿using DataAccess;
+﻿using ProgrammingWithPalermo.ChurchBulletin.DataAccess;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 
-namespace IntegrationTests
+namespace ProgrammingWithPalermo.ChurchBulletin.IntegrationTests
 {
     internal class TestDataConfiguration : IDataConfiguration
     {

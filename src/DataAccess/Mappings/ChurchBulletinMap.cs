@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Mappings
+namespace ProgrammingWithPalermo.ChurchBulletin.DataAccess.Mappings
 {
-    public class ChurchBulletinMap : EntityMapBase<ChurchBulletin>
+    public class ChurchBulletinMap : EntityMapBase<ChurchBulletinItem>
     {
-        protected override void MapMembers(EntityTypeBuilder<ChurchBulletin> entity)
+        protected override void MapMembers(EntityTypeBuilder<ChurchBulletinItem> entity)
         {
 
         }

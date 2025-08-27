@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess
+namespace ProgrammingWithPalermo.ChurchBulletin.DataAccess
 {
     public interface IDataConfiguration
     {

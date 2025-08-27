@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Mappings
+namespace ProgrammingWithPalermo.ChurchBulletin.DataAccess.Mappings
 {
     public class DataContext : DbContext
     {
