@@ -1,54 +1,39 @@
-using ProgrammingWithPalermo.ChurchBulletin.DataAccess.Mappings;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using ProgrammingWithPalermo.ChurchBulletin.Core.Model;
+using ProgrammingWithPalermo.ChurchBulletin.DataAccess.Mappings;
 using Shouldly;
-using System.Globalization;
 
 namespace ProgrammingWithPalermo.ChurchBulletin.IntegrationTests
 {
-    public class ChurchBulletinMappingTester
+    public class ChurchBulletingMappingTester
     {
         [Test]
         public void ShouldMapChurchBulletin()
         {
-            // arrange
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            // EmptyDatabase(configuration);
-
             var bulletin = new ChurchBulletinItem();
-            bulletin.Name = "Worchip service";
+            bulletin.Name = "Worship service";
             bulletin.Place = "Sanctuary";
-            bulletin.Date = new DateTime(2025, 8, 26, 0, 0, 0, DateTimeKind.Utc);
+            bulletin.Date = new DateTime(2022, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-
-            using (var dataContext = new DataContext(new TestDataConfiguration(configuration)))
+            using (var context = TestHost.GetRequiredService<DbContext>())
             {
-                dataContext.Add(bulletin);
-                dataContext.SaveChanges();
+                context.Add(bulletin);
+                context.SaveChanges();
             }
 
-            // act
-            ChurchBulletinItem? rehydratedEntity;
-            using (var context = new DataContext(new TestDataConfiguration(configuration)))
+            ChurchBulletinItem rehydratedEntity;
+            using (var context = TestHost.GetRequiredService<DbContext>())
             {
                 rehydratedEntity = context.Set<ChurchBulletinItem>()
-                    .SingleOrDefault(b => b == bulletin);
+                   .Single(b => b == bulletin);
             }
 
-            // assert
-            rehydratedEntity?.Id.ShouldBe(bulletin.Id);
+            rehydratedEntity.Id.ShouldBe(bulletin.Id);
             rehydratedEntity.ShouldBe(bulletin);
-            rehydratedEntity?.Place.ShouldBe(bulletin.Place);
-            rehydratedEntity?.Name.ShouldBe(bulletin.Name);
-            rehydratedEntity?.Date.ShouldBe(bulletin.Date);
-        }
-        private static void EmptyDatabase(IConfiguration config)
-        {
-            DatabaseEmptier.DeleteAllData(config);
+            rehydratedEntity.Name.ShouldBe(bulletin.Name);
+            rehydratedEntity.Place.ShouldBe(bulletin.Place);
+            rehydratedEntity.Date.ShouldBe(bulletin.Date);
         }
     }
 }
